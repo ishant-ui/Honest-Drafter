@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="The Honest Drafter — essays on being human, friendship, music, and becoming.">
+  <title>The Honest Drafter — Notes on being human</title>
+  <style>
+    :root {
+      --paper: #faf8f2;
+      --ink: #24231f;
+      --muted: #77746b;
+      --line: #e7e2d7;
+      --accent: #a34e35;
+      --card: #fffdf8;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.65;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+    .wrap { width: min(100% - 40px, 920px); margin: 0 auto; }
+    header {
+      border-bottom: 1px solid var(--line);
+      background: rgba(250,248,242,.94);
+    }
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand { font-size: 1.25rem; font-weight: bold; letter-spacing: -.04em; }
+    .brand span { color: var(--accent); }
+    .navlinks { display: flex; gap: 22px; align-items: center; font: 0.9rem Arial, sans-serif; }
+    .navlinks a:hover, .text-link:hover { color: var(--accent); }
+    .subscribe-link {
+      border: 1px solid var(--ink); border-radius: 999px; padding: 8px 14px;
+    }
+    .hero { padding: 74px 0 58px; border-bottom: 1px solid var(--line); }
+    .eyebrow {
+      font: 700 .72rem Arial, sans-serif; text-transform: uppercase;
+      letter-spacing: .15em; color: var(--accent);
+    }
+    h1 { font-size: clamp(2.8rem, 8vw, 5.4rem); line-height: .99; letter-spacing: -.065em; margin: 18px 0; font-weight: 500; }
+    .hero p { color: var(--muted); font-size: 1.18rem; max-width: 580px; margin: 0; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .button {
+      display: inline-block; border: 1px solid var(--ink); border-radius: 4px;
+      background: var(--ink); color: white; padding: 11px 17px;
+      font: 700 .88rem Arial, sans-serif; cursor: pointer;
+    }
+    .button.secondary { background: transparent; color: var(--ink); }
+    .section-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin: 34px 0 8px; }
+    h2 { font-size: 1.7rem; font-weight: 500; letter-spacing: -.04em; margin: 0; }
+    .count { font: .8rem Arial, sans-serif; color: var(--muted); }
+    .featured {
+      margin: 24px 0 38px; padding: 28px; background: var(--card);
+      border: 1px solid var(--line); display: grid; grid-template-columns: 1.4fr .6fr; gap: 24px;
+    }
+    .featured h3 { font-size: clamp(1.8rem, 4vw, 2.7rem); line-height: 1.1; letter-spacing: -.05em; font-weight: 500; margin: 10px 0; }
+    .featured p { color: var(--muted); margin: 0 0 16px; }
+    .feature-art {
+      min-height: 190px; display: grid; place-items: center; background: #e9e2d3;
+      color: #8b4b37; font-size: 3rem; overflow: hidden;
+    }
+    .meta { font: .78rem Arial, sans-serif; color: var(--muted); }
+    .essay-list { border-top: 1px solid var(--line); }
+    .essay {
+      padding: 23px 2px; border-bottom: 1px solid var(--line);
+      display: grid; grid-template-columns: 1fr auto; gap: 20px; align-items: start;
+    }
+    .essay h3 { font-size: 1.45rem; line-height: 1.2; font-weight: 500; letter-spacing: -.035em; margin: 5px 0 7px; }
+    .essay p { margin: 0; color: var(--muted); max-width: 620px; }
+    .tag { color: var(--accent); font: 700 .7rem Arial, sans-serif; letter-spacing: .09em; text-transform: uppercase; }
+    .read-time { white-space: nowrap; padding-top: 4px; }
+    .about {
+      margin: 60px 0; padding: 30px 0; border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line); display: grid; grid-template-columns: .7fr 1.3fr; gap: 30px;
+    }
+    .about p { margin: 0; color: var(--muted); }
+    footer { padding: 26px 0 38px; color: var(--muted); font: .8rem Arial, sans-serif; display: flex; justify-content: space-between; gap: 12px; }
+    .text-link { text-decoration: underline; text-underline-offset: 4px; }
+    .hidden { display: none !important; }
+    .reader {
+      padding: 55px 0 80px; max-width: 690px; margin: auto; width: min(100% - 40px, 690px);
+    }
+    .reader h1 { font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.05; margin: 14px 0; }
+    .reader .dek { font-size: 1.2rem; color: var(--muted); }
+    .reader-content { font-size: 1.12rem; }
+    .reader-content p { margin: 1.35em 0; }
+    .back { display: inline-block; margin-bottom: 30px; font: .88rem Arial, sans-serif; color: var(--accent); }
+    .note { color: var(--muted); font: .8rem Arial, sans-serif; margin-top: 16px; }
+    @media (max-width: 650px) {
+      .wrap { width: min(100% - 28px, 920px); }
+      .nav { min-height: 68px; }
+      .navlinks { gap: 12px; font-size: .8rem; }
+      .navlinks .optional { display: none; }
+      .hero { padding: 55px 0 42px; }
+      .featured { grid-template-columns: 1fr; padding: 20px; }
+      .feature-art { min-height: 120px; }
+      .about { grid-template-columns: 1fr; gap: 10px; }
+      .essay { grid-template-columns: 1fr; gap: 6px; }
+      .read-time { display: none; }
+      footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a href="#" class="brand" data-home>The Honest <span>Drafter.</span></a>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="#essays" data-home>Essays</a>
+        <a href="#about" class="optional" data-home>About</a>
+        <a href="mailto:hello@example.com" class="subscribe-link">Say hello ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="homePage">
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">A personal publication</div>
+        <h1>Notes on being<br>human.</h1>
+        <p>Thoughts on friendship, music, growing up, and the strange business of understanding ourselves. Written slowly, and honestly.</p>
+        <div class="hero-actions">
+          <a class="button" href="#essays">Read the essays</a>
+          <a class="button secondary" href="#about">A little about me</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap" id="essays">
+      <div class="section-head">
+        <h2>Start here</h2>
+        <span class="count" id="essayCount">4 essays</span>
+      </div>
+      <article class="featured">
+        <div>
+          <div class="tag">Featured essay · Self-reflection</div>
+          <h3><a href="#" data-article="potential">Be delusional about your potential</a></h3>
+          <p>On wanting more from life, feeling behind, and learning to keep going without having every answer.</p>
+          <div class="meta">6 min read · A note to the person becoming</div>
+          <p style="margin-top:20px"><a class="text-link" href="#" data-article="potential">Read the essay →</a></p>
+        </div>
+        <div class="feature-art" aria-hidden="true">✳</div>
+      </article>
+
+      <div class="essay-list" id="essayList">
+        <article class="essay">
+          <div><div class="tag">Friendship</div><h3><a href="#" data-article="infinity">Friendship — the feeling of infinity</a></h3><p>Some people make ordinary days feel like memories you will keep forever.</p><div class="meta" style="margin-top:10px">5 min read · Personal essay</div></div>
+          <div class="meta read-time">Essay No. 01</div>
+        </article>
+        <article class="essay">
+          <div><div class="tag">Music</div><h3><a href="#" data-article="music">From music hater to lover</a></h3><p>How something I once ignored became a language for feelings I could not explain.</p><div class="meta" style="margin-top:10px">4 min read · Culture</div></div>
+          <div class="meta read-time">Essay No. 02</div>
+        </article>
+        <article class="essay">
+          <div><div class="tag">Growing up</div><h3><a href="#" data-article="introvert">On being an introvert in a loud world</a></h3><p>There is a difference between having nothing to say and needing the right space to say it.</p><div class="meta" style="margin-top:10px">6 min read · Reflection</div></div>
+          <div class="meta read-time">Essay No. 03</div>
+        </article>
+        <article class="essay">
+          <div><div class="tag">Self-reflection</div><h3><a href="#" data-article="potential">Be delusional about your potential</a></h3><p>A reminder that ambition and uncertainty can exist in the same person.</p><div class="meta" style="margin-top:10px">6 min read · Reflection</div></div>
+          <div class="meta read-time">Essay No. 04</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="wrap about" id="about">
+      <div><div class="eyebrow">Behind the words</div><h2>About the drafter</h2></div>
+      <div>
+        <p>The Honest Drafter is a home for unfinished thoughts, honest questions, and essays about the things that make us human. No guru act. No pretending to have life figured out. Just paying attention, and putting it into words.</p>
+        <p style="margin-top:14px">If something here makes you pause, smile, or feel a little less alone, then the words have found their place.</p>
+      </div>
+    </section>
+  </main>
+
+  <main id="readerPage" class="hidden">
+    <article class="reader">
+      <a href="#" class="back" id="backHome">← All essays</a>
+      <div class="eyebrow" id="readerCategory">Essay</div>
+      <h1 id="readerTitle">Article title</h1>
+      <p class="dek" id="readerDek"></p>
+      <div class="meta" id="readerMeta">The Honest Drafter · Personal essay</div>
+      <hr style="border:0;border-top:1px solid var(--line);margin:30px 0">
+      <div class="reader-content" id="readerContent"></div>
+      <p style="margin-top:40px"><a class="text-link" href="mailto:hello@example.com">Reply to this essay ↗</a></p>
+    </article>
+  </main>
+
+  <footer class="wrap">
+    <span>© <span id="year"></span> The Honest Drafter</span>
+    <span>Made with care, and a little too much thinking.</span>
+  </footer>
+
+  <script>
+    const essays = {
+      potential: {
+        category: "Self-reflection",
+        title: "Be delusional about your potential",
+        dek: "A note about ambition, uncertainty, and giving yourself room to become.",
+        paragraphs: [
+          "To want something deeply has its own kind of weight. You can see a version of your life that does not exist yet, and the distance between that vision and today can feel enormous.",
+          "It is easy to mistake uncertainty for evidence that you are not capable. But not knowing exactly how you will get somewhere is not the same as being unable to get there.",
+          "Maybe being a little delusional means allowing yourself to imagine a future before the world has given you a reason to believe in it. Not ignoring reality, but refusing to let today's limitations write the whole story.",
+          "You will have ordinary days. You will change direction, learn slowly, and discover that some dreams need reshaping. None of that makes the effort meaningless.",
+          "You do not have to prove your entire potential today. You only have to give it a chance: one page, one project, one honest attempt at a time."
+        ]
+      },
+      infinity: {
+        category: "Friendship",
+        title: "Friendship — the feeling of infinity",
+        dek: "Some people turn ordinary moments into memories that seem to last forever.",
+        paragraphs: [
+          "Friendship rarely announces itself as something extraordinary. Sometimes it begins with a shared joke, a walk that takes too long, or a conversation that was supposed to last five minutes.",
+          "Then, without noticing when it happened, someone becomes part of the way you remember a whole chapter of your life. A song reminds you of them. A place becomes funny because of something they once said.",
+          "Perhaps that is why friendship can feel infinite. Not because every friendship lasts forever, but because the moments it gives us keep travelling with us.",
+          "Growing up may change the distance between people. Schedules fill up, cities change, and conversations become less frequent. The good parts do not become unreal just because life moves forward.",
+          "Some people leave fingerprints on the person you become. That is a quiet kind of forever."
+        ]
+      },
+      music: {
+        category: "Music",
+        title: "From music hater to lover",
+        dek: "On finding a language for feelings that were difficult to put into words.",
+        paragraphs: [
+          "There was a time when music felt like background noise to me. I did not understand why people returned to the same song again and again, as if it contained a secret they were afraid to lose.",
+          "Then, gradually, a song would fit a moment too perfectly to ignore. A melody could make a memory feel close, or make a difficult day a little easier to carry.",
+          "I began to realise that listening is not always about the sound. Sometimes it is about the person you were when you first heard it, the person you miss, or the feeling you could not explain at the time.",
+          "I did not suddenly understand every song. I just stopped expecting music to explain itself. Some things are worth feeling before you can explain them."
+        ]
+      },
+      introvert: {
+        category: "Growing up",
+        title: "On being an introvert in a loud world",
+        dek: "There is a difference between having nothing to say and needing the right space to say it.",
+        paragraphs: [
+          "A loud world often treats quietness like a problem to solve. Speak up. Be more outgoing. Make yourself visible. As if every thought only matters after it has been announced.",
+          "But quiet people are not empty rooms. There can be entire conversations happening inside someone who has not said a word yet.",
+          "Being introverted does not mean avoiding people or never wanting to be understood. It can simply mean that connection feels better when it has room to breathe.",
+          "There is nothing wrong with learning to speak with confidence. There is also nothing wrong with protecting the thoughtful, observant part of yourself that needs a little time.",
+          "You do not have to become the loudest person in the room to have something worth saying."
+        ]
+      }
+    };
+
+    const homePage = document.getElementById("homePage");
+    const readerPage = document.getElementById("readerPage");
+    function showHome() {
+      readerPage.classList.add("hidden");
+      homePage.classList.remove("hidden");
+      window.scrollTo(0, 0);
+    }
+    function showArticle(key) {
+      const essay = essays[key];
+      if (!essay) return;
+      document.getElementById("readerCategory").textContent = essay.category;
+      document.getElementById("readerTitle").textContent = essay.title;
+      document.getElementById("readerDek").textContent = essay.dek;
+      document.getElementById("readerMeta").textContent = "The Honest Drafter · " + essay.category;
+      const content = document.getElementById("readerContent");
+      content.replaceChildren();
+      essay.paragraphs.forEach(text => {
+        const p = document.createElement("p");
+        p.textContent = text;
+        content.appendChild(p);
+      });
+      homePage.classList.add("hidden");
+      readerPage.classList.remove("hidden");
+      window.scrollTo(0, 0);
+    }
+    document.querySelectorAll("[data-article]").forEach(link => {
+      link.addEventListener("click", event => {
+        event.preventDefault();
+        showArticle(link.dataset.article);
+      });
+    });
+    document.querySelectorAll("[data-home]").forEach(link => {
+      link.addEventListener("click", event => {
+        if (link.getAttribute("href") === "#") {
+          event.preventDefault();
+          showHome();
+        }
+      });
+    });
+    document.getElementById("backHome").addEventListener("click", event => {
+      event.preventDefault();
+      showHome();
+      document.getElementById("essays").scrollIntoView();
+    });
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
